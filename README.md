@@ -22,6 +22,13 @@ backlight is built, what the protocol does, what was measured.
 
 ## Install
 
+Get the code; every command below runs from this folder:
+
+```sh
+git clone https://github.com/Dwcr370/Keyboard-Konf.git
+cd Keyboard-Konf
+```
+
 Access without sudo, one time. The rule opens only the lighting interface of
 the controller to the logged-in user; the file must sort before
 `73-seat-late.rules`, which is where the `uaccess` tag becomes an ACL.
@@ -42,6 +49,10 @@ The command and the launcher entry (no root needed):
 ln -s "$PWD/kkonf.py" ~/.local/bin/kkonf
 cp kkonf.desktop ~/.local/share/applications/
 ```
+
+`kkonf` is a link into this folder, so keep the folder where it is. After
+moving or renaming it, run `ln -sf "$PWD/kkonf.py" ~/.local/bin/kkonf` from
+the new place and, if the daemon runs, `systemctl --user restart kkonf`.
 
 Requirements: Python 3.12+, and for the window `python-gobject`, `gtk4`,
 `libadwaita`. The CLI needs nothing beyond the standard library.
@@ -143,6 +154,12 @@ section is three QML files copied into the installed shell plus six lines in
 `AppearancePane.qml`; a pacman hook puts them back after every shell upgrade.
 The hook runs a root-owned copy in `/usr/local/share/keyboard-konf/`, never
 anything from a home directory.
+
+Tested with caelestia-shell 1.5.2 and Quickshell 0.3.2; the patch fits the
+settings pane of every 1.x release up to 1.6.2. Caelestia 2.0 replaced the
+settings window, so on 2.x the installer stops and the section is not
+installed; the daemon, the command line and the GTK window do not depend on
+the shell.
 
 ```sh
 sudo caelestia/install.sh apply             # copies the files there, patches the shell
