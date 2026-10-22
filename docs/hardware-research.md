@@ -381,6 +381,10 @@ Planckian locus below 4000 K.
   zone: `temp` and `tint` (two sliders, as in a photo editor), `level` (dims
   the whole zone) and the resulting `gains`. The older single-zone format is
   still read.
+- Without that file every zone starts from the average of the tested unit's
+  four zones, `temp` 0.60 and `tint` 0.53 at `level` 1.0; "Reset" on the
+  calibration page returns to it. On another unit the zones may still need
+  their own correction.
 - The calibration page in the GUI: a black screen with a grey strip just above
   the keys, a zone choice ("All" moves every zone together and keeps their
   differences), three sliders, swatches for checking, and save.

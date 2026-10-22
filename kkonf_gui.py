@@ -362,7 +362,7 @@ class CalibrationWindow(Adw.Window):
     def _on_reset(self, _button: Gtk.Button) -> None:
         targets = range(core.ZONE_COUNT) if self.target is None else (self.target,)
         for index in targets:
-            self.backlight.set_zone(index, 0.0, 0.0, 1.0)
+            self.backlight.set_zone(index, core.DEFAULT_TEMP, core.DEFAULT_TINT, 1.0)
         self._sync_sliders()
         self._send()
 

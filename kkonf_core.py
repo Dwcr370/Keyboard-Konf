@@ -69,6 +69,14 @@ KELVIN_MAX = 12000
 TEMP_SPAN = 2.0
 TINT_SPAN = 0.75
 
+# Where a new install starts: the average of a by-eye calibration of the four
+# zones on the tested unit, applied to every zone. Its blue LEDs are weak, so
+# even a neutral white needs red and green well below blue, and a plain
+# 255,255,255 looks yellow. LEDs differ between laptops and between zones, so
+# this is a starting point for `kkonf calibrate`, not a substitute for it.
+DEFAULT_TEMP = 0.60
+DEFAULT_TINT = 0.53
+
 # ------------------------------------------------------------------- config
 
 CONFIG_DIR = os.path.join(
@@ -407,7 +415,8 @@ def sliders_from_gains(gains: Gains) -> tuple[float, float, float]:
 
 
 def default_zone_calibration() -> dict:
-    return {"temp": 0.0, "tint": 0.0, "level": 1.0, "gains": list(NO_GAINS)}
+    gains = gains_with_level(DEFAULT_TEMP, DEFAULT_TINT, 1.0)
+    return {"temp": DEFAULT_TEMP, "tint": DEFAULT_TINT, "level": 1.0, "gains": list(gains)}
 
 
 def _parse_zone_entry(entry) -> dict:

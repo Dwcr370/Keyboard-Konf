@@ -160,6 +160,13 @@ screen colour comes out dark) but not always what you want on a backlight.
 
 ## Calibrate once
 
+Without a calibration file the program starts from a white balance set by eye
+on the tested laptop (the average of its four zones), so white is already
+close to neutral on the same model. LEDs differ between laptops and between
+zones, though: if white still looks tinted, or one zone does not match the
+others, calibrate, zone by zone where needed. "Reset" on the calibration page
+returns to that starting point.
+
 `kkonf calibrate` turns the screen black with a grey strip right above the
 keys. With "All" selected, "warm / cold" and "green / magenta" move all four
 zones together; pick a zone number to correct that zone alone (zones can
