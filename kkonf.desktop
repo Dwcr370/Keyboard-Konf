@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Name=Keyboard Konf
+Comment=Legion keyboard backlight: colours, white balance
+Exec=kkonf gui
+TryExec=kkonf
+Icon=input-keyboard
+Terminal=false
+Categories=Settings;HardwareSettings;
+Keywords=keyboard;backlight;rgb;legion;

@@ -1,0 +1,25 @@
+# Lenovo Legion 4-zone RGB keyboard lighting controller (ITE 8295, 048d:c994)
+#
+# Grants the active local user access to the lighting node so keyboard-konf
+# runs without sudo. Matching is by VID:PID, not by node number, because the
+# kernel may assign a different /dev/hidrawN after a reboot.
+#
+# Only USB interface 0 is opened up: it carries the lighting report (0xCC).
+# Interface 1 is an undocumented 64-byte vendor channel, possibly the firmware
+# update path, and stays root-only. The first rule marks interface-0 nodes,
+# the second applies the tag to the one that belongs to this controller.
+#
+# The file must sort before 73-seat-late.rules, which is where the "uaccess"
+# tag is turned into an ACL; a 99-* file would be processed too late.
+#
+# Install:
+#   sudo cp udev/60-keyboard-konf.rules /etc/udev/rules.d/
+#   sudo udevadm control --reload-rules && sudo udevadm trigger --subsystem-match=hidraw
+#   getfacl /dev/hidraw*        # one node must now list user:<you>:rw-
+#
+# Uninstall:
+#   sudo rm /etc/udev/rules.d/60-keyboard-konf.rules
+#   sudo udevadm control --reload-rules && sudo udevadm trigger --subsystem-match=hidraw
+
+SUBSYSTEM=="hidraw", ATTRS{bInterfaceNumber}=="00", ENV{KKONF_IF0}="1"
+SUBSYSTEM=="hidraw", ENV{KKONF_IF0}=="1", ATTRS{idVendor}=="048d", ATTRS{idProduct}=="c994", TAG+="uaccess"

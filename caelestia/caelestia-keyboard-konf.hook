@@ -1,0 +1,10 @@
+[Trigger]
+Operation = Install
+Operation = Upgrade
+Type = Package
+Target = caelestia-shell-git
+
+[Action]
+Description = Restoring the keyboard-konf Keyboard section in Caelestia AppearancePane.qml
+When = PostTransaction
+Exec = /bin/sh /usr/local/share/keyboard-konf/install.sh apply

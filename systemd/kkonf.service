@@ -1,0 +1,21 @@
+# keyboard-konf lighting daemon, a systemd *user* unit.
+#
+# Install:   mkdir -p ~/.config/systemd/user && cp systemd/kkonf.service ~/.config/systemd/user/
+#            systemctl --user daemon-reload && systemctl --user enable --now kkonf
+# Logs:      journalctl --user -u kkonf -f
+# Uninstall: systemctl --user disable --now kkonf && rm ~/.config/systemd/user/kkonf.service
+#
+# The device is reachable without root through the udev rule in udev/, and
+# no display is needed, so the unit only wants the user session to exist.
+
+[Unit]
+Description=keyboard-konf: Lenovo Legion keyboard backlight daemon
+
+[Service]
+Type=simple
+ExecStart=%h/.local/bin/kkonf daemon
+Restart=on-failure
+RestartSec=2
+
+[Install]
+WantedBy=default.target
